@@ -1,0 +1,19 @@
+{
+  "name": "alumni_backend",
+  "version": "1.0.0",
+  "description": "Dependencies : \"Sequelize\"  \"mysql2\" \"nodemon\" \"express\" --- \"bcrypt\" \"jsonwebtoken\" \"cors\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foreach-academy/Alumni_Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/foreach-academy/Alumni_Backend/issues"
+  },
+  "homepage": "https://github.com/foreach-academy/Alumni_Backend#readme"
+}
