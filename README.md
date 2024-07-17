@@ -7,3 +7,4 @@ Dependencies :
 "bcrypt"
 "jsonwebtoken"
 "cors"
+"dotenv"

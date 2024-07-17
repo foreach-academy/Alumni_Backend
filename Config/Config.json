@@ -1,7 +1,8 @@
 {
-    "database" : "",
-    "username" : "",
-    "password" : "",
-    "host" : "",
-    "port" : ""
+    "database" : "alumni",
+    "username" : "root",
+    "password" : "root",
+    "host" : "localhost",
+    "port" : 3306
 }
+

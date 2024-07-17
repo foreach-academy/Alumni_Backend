@@ -7,4 +7,4 @@ const sequelize = new Sequelize (config.database, config.username, config.passwo
     port : config.port
 })
 
-module.exports =sequelize;
+module.exports = sequelize;
