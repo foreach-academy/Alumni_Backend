@@ -13,10 +13,10 @@ const connection = mysql.createConnection({
 
 // const connection = mysql.createConnection({
 //     host: 'localhost',
-//     port: 3306,
+//     port: 8889,
 //     user: 'root',
-//     password: 'fast',
-//     database: 'hms'
+//     password: 'root',
+//     database: 'Alumni'
 // })
 
 connection.connect( (err) => {
@@ -25,7 +25,7 @@ connection.connect( (err) => {
     }
     else
     {
-        console.log("Database connected!")
+        console.log("Database connecté!")
     }
 })
 
