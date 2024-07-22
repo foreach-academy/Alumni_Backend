@@ -16,6 +16,18 @@ class UtilisateurController {
             return res.status(500).json({ message: "Erreur lors de la création de l'utilisateur" });
         }
     }
+
+    async validateUser (request, result) {
+        try {
+            const user = UtilisateurService.updateUtilisateur(request.params.id, request.id)
+            result.json(user)
+            result.status(200)
+            result.json({message : "Utilisateur/ice validé·e !"})
+        } catch (error) {
+            result.status(404)
+            result.json({error : "Utilisateur/ice non trouvé·e"})
+        }
+    }
 }
 
 module.exports = new UtilisateurController();
