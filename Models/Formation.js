@@ -1,23 +1,22 @@
-const {Model, DataTypes} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../Config/Sequelize');
 
-class Formation extends Model {
+class Formation extends Model {}
 
-}
-
-Formation.init ({
-    id_formation : {
-        type : DataTypes.INTEGER,
-        primaryKey : true, 
-        autoIncrement: true,
+Formation.init({
+    id_formation: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
-    type_formation : {
-        type : DataTypes.STRING,
-        allowNull : false
+    type_formation: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     sequelize,
-    modelName : 'formation',
+    modelName: 'formation',
+    tableName: 'formation',
     timestamps: false,
 });
 
