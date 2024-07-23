@@ -1,7 +1,7 @@
 const UtilisateurService = require('../Services/UtilisateurService');
 
 class UtilisateurController {
-    async addUtilisateur (req, res) {
+    async addUtilisateur(req, res) {
         const { ut_email, ut_motdepasse, id_role } = req.body;
         try {
             const newUser = await UtilisateurService.addUtilisateur({
@@ -17,15 +17,26 @@ class UtilisateurController {
         }
     }
 
-    async validateUser (request, result) {
+    async validateUser(request, result) {
         try {
-            const user = UtilisateurService.updateUtilisateur(request.params.id, request.id)
-            result.json(user)
-            result.status(200)
-            result.json({message : "Utilisateur/ice validé·e !"})
+            const user = await UtilisateurService.getUtilisateurByID(request.params.id);
+            
+            if (!user) {
+                return result.status(404).json({ message: "Utilisateur/ice non trouvé·e !" });
+            }
+
+            if (user.ut_valide) {
+                return result.status(400).json({ message: "Utilisateur/ice déjà validé·e !" });
+            }
+
+            const updatedUser = await UtilisateurService.updateUtilisateur(request.params.id, {
+                ut_valide: true,
+                ut_actif: true
+            });
+
+            return result.status(200).json({ message: "Utilisateur/ice validé·e !", user: updatedUser });
         } catch (error) {
-            result.status(404)
-            result.json({error : "Utilisateur/ice non trouvé·e"})
+            return result.status(500).json({ message: "Erreur lors de la validation de l'utilisateur/ice" });
         }
     }
 }

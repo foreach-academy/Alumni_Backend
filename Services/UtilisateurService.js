@@ -5,6 +5,10 @@ class UtilisateurService {
         return await Utilisateur.create(utilisateur, options);
     }
 
+    async getUtilisateurByID(utilisateurID) {
+        return await Utilisateur.findByPk(utilisateurID);
+    }
+
     async updateUtilisateur(utilisateurID, utilisateur) {
         return await Utilisateur.update(utilisateur, {
             where : {
