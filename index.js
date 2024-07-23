@@ -1,5 +1,6 @@
 const express = require ("express");
 const cors = require ("cors");
+const app = express()
 
 require('./Config/Associations');
 app.use(cors());
@@ -15,4 +16,4 @@ app.use('/profil', profilRoutes);
 app.use('/utilisateur', utilisateurRoutes);
 app.use('/authenticate', authenticateRoutes);
 
-module.exports = app ;
+module.exports = app;
