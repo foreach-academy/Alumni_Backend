@@ -18,4 +18,4 @@ app.use('/profil', AuthenticateController.authenticateToken, profilRoutes);
 app.use('/utilisateur', AuthenticateController.authenticateToken, utilisateurRoutes);
 app.use('/authenticate', AuthenticateRoutes);
 
-module.exports = app;
+module.exports = app ;
