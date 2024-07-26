@@ -1,3 +1,4 @@
 node_modules/
 package_log.json
+.env
 Config/Config.json
