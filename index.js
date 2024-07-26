@@ -13,12 +13,14 @@ const accountRoutes = require('./Routes/CompteRoute');
 const profilRoutes = require('./Routes/ProfilRoute');
 const utilisateurRoutes = require('./Routes/UtilisateurRoute');
 const authenticateRoutes = require('./Routes/AuthenticateRoute');
+const PromotionRoutes = require('./Routes/PromotionRoute');
 const FormationRoutes = require('./Routes/FormationRoute');
 
 app.use('/account', accountRoutes);
 app.use('/profil', AuthenticateController.authenticateToken, profilRoutes);
 app.use('/utilisateur', AuthenticateController.authenticateToken, utilisateurRoutes);
 app.use('/authenticate', AuthenticateRoutes);
+app.use('/promotion', PromotionRoutes);
 app.use('/formation', FormationRoutes);
 
 module.exports = app;
