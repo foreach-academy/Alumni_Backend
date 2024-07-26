@@ -7,4 +7,6 @@ const sequelize = new Sequelize (config.database, config.username, config.passwo
     port : config.port
 })
 
+console.log("Database connecté");
+
 module.exports = sequelize;
