@@ -24,7 +24,13 @@ class UtilisateurController {
                 en_nom_contact,
                 en_fonction_contact
             };
+
+  
+
+            
             await sendDemandeInscription(userDetails);
+
+
             return result.status(201).json(newUser);
         } catch (error) {
             return result.status(500).json({ message: "Erreur lors de la création de l'utilisateur" });
