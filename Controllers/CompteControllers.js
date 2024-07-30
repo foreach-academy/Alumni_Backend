@@ -54,7 +54,6 @@ class CompteController {
                     id_promotion,
                     id_formation
                 }, { transaction: t });
-
                 
                 const userDetails = {
                     id_role,
