@@ -24,8 +24,12 @@ class UtilisateurController {
                 en_nom_contact,
                 en_fonction_contact
             };
+
+  
+
             
             await sendDemandeInscription(userDetails);
+
 
             return result.status(201).json(newUser);
         } catch (error) {
