@@ -6,6 +6,9 @@ const sequelize = require('../Config/Sequelize');
 const UtilisateurService = require('../Services/UtilisateurService');
 const ProfilService = require('../Services/ProfilService');
 const ParcoursService = require('../Services/ParcoursService');
+const mailer = require ('../Services/MailerService')
+
+
 
 class CompteController {
     async createAccountRequest(req, res) {
@@ -53,9 +56,10 @@ class CompteController {
                     id_promotion,
                     id_formation
                 }, { transaction: t });
-
+                await sendDemandeInscription(userDetails);
                 await t.commit();
                 return res.status(200).json({ message: "Requête envoyée !" });
+                
             } catch (error) {
                 console.log(error);
                 await t.rollback();
