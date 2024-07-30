@@ -1,6 +1,4 @@
-const UtilisateurService = require('../Services/UtilisateurService');
-const mailer = require ('../Services/MailerService') /* Je ne sais pas si le fichier mailer est correctement importer et en dessous en commentaire, il y a une autre façon d'importer directement les fonctions mais je ne suis pas sur non plus  */
-/* const { sendDemandeInscription, sendInscriptionValide, sendInscriptionRefus } = require('../path/to/mailer'); */
+const { sendInscriptionValide } = require('../Services/MailerService'); // Importation de la fonction
 
 class UtilisateurController {
     async addUtilisateur(request, result) {
@@ -24,7 +22,7 @@ class UtilisateurController {
                 en_nom_contact,
                 en_fonction_contact
             };
-            await sendDemandeInscription(userDetails);
+            
             return result.status(201).json(newUser);
         } catch (error) {
             return result.status(500).json({ message: "Erreur lors de la création de l'utilisateur" });
@@ -48,7 +46,7 @@ class UtilisateurController {
                 ut_actif: true
             });
 
-            await sendInscriptionValide();
+            await sendInscriptionValide(user.ut_email);
 
             return result.status(200).json({ message: "Utilisateur/ice validé·e !", user: updatedUser });
         } catch (error) {
@@ -58,4 +56,3 @@ class UtilisateurController {
 }
 
 module.exports = new UtilisateurController();
-

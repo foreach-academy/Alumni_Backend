@@ -9,9 +9,8 @@ const transporter = nodemailer.createTransport({
   },
   auth: {
     user: 'test.foreach59@gmail.com',
-    pass: 'test',
+    pass: 'ForEach59!',
   },
- 
 });
 
 const sendDemandeInscription = async (userDetails) => {
@@ -79,7 +78,7 @@ const sendInscriptionValide = async () => {
   }
 };
 
-const sendInscriptionRefus = async ( raisonRefus) => {
+const sendInscriptionRefus = async (raisonRefus) => {
   const textMail = `
     <p>Votre demande d'inscription sur le site ForEach Alumni n'a pas été acceptée pour la raison suivante :</p>
     <p>Non autorisé </p>
