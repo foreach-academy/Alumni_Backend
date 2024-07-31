@@ -1,8 +1,8 @@
 {
     "database" : "alumni",
-    "username" : "root",
-    "password" : "root",
+    "username" : "HorseAndCat",
+    "password" : "MaPlanteEstVerte",
     "host" : "localhost",
-    "port" : 8889
+    "port" : "3306"
 }
 
