@@ -12,7 +12,7 @@ class UtilisateurService {
     async updateUtilisateur(utilisateurID, utilisateur) {
         return await Utilisateur.update(utilisateur, {
             where : {
-                utilisateurid : utilisateurID
+                id_utilisateur : utilisateurID
             },
             individualHooks : true
         })
