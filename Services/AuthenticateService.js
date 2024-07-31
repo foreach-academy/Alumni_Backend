@@ -1,4 +1,6 @@
 const Utilisateur = require('../Models/Utilisateur');
+const jwt = require('jsonwebtoken');
+const config = require('../Config/Config.json');
 
 class AuthenticateService {
     async login(ut_email, ut_motdepasse) {
@@ -8,12 +10,23 @@ class AuthenticateService {
             throw new Error("Mauvais email ou mot de passe");
         }
 
-        if (!utilisateur.valide) {
+        if (!utilisateur.ut_valide) {
             throw new Error("Le compte doit être validé par un administrateur");
         }
 
-        return utilisateur;
+        const token = this.generateToken(utilisateur);
+        return { utilisateur, token };
     }
+
+    generateToken(utilisateur) {
+        const payload = {
+            id: utilisateur.id_utilisateur,
+            email: utilisateur.ut_email
+        };
+        return jwt.sign(payload, config.SECRET, { expiresIn: '30d' });
+    }
+
+        
 }
 
 module.exports = new AuthenticateService();
