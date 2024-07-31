@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
   },
   auth: {
     user: 'test.foreach59@gmail.com',
-    pass: 'ForEach59!',
+    pass: 'gqan xszm akbl bwlr',
   },
 });
 
