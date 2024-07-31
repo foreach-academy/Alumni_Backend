@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 const { sendInscriptionValide } = require('../Services/MailerService'); // Importation de la fonction
-=======
-const UtilisateurService = require('../Services/UtilisateurService');
-const mailer = require ('../Services/MailerService') /* Je ne sais pas si le fichier mailer est correctement importer et en dessous en commentaire, il y a une autre façon d'importer directement les fonctions mais je ne suis pas sur non plus  */
-/* const { sendDemandeInscription, sendInscriptionValide, sendInscriptionRefus } = require('../path/to/mailer'); */
->>>>>>> develop
 
 class UtilisateurController {
     async addUtilisateur(request, result) {
