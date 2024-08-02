@@ -17,7 +17,7 @@ const FormationRoutes = require('./Routes/FormationRoute');
 
 app.use('/account', accountRoutes);
 app.use('/profil', AuthenticateController.authenticateToken, profilRoutes);
-app.use('/utilisateur', AuthenticateController.authenticateToken, utilisateurRoutes);
+app.use('/utilisateur', utilisateurRoutes);
 app.use('/authenticate', AuthenticateRoutes);
 app.use('/formation', FormationRoutes);
 
