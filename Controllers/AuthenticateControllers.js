@@ -3,6 +3,16 @@ const jwt = require('jsonwebtoken');
 const config = require('../Config/Config.json');
 
 class AuthenticateController {
+    async inscription(request, result){
+        try {
+            const utilisateur = await AuthenticateService.inscription(request.body);
+            result.json({utilisateur : utilisateur, message : "Inscription réussie!"});
+        } catch (error) {
+            result.status(500)
+            result.json({error : "Une erreur est survenue lors de l'inscription"});
+        }
+    }
+
     async login(request, result) {
         try {
             const { ut_email, ut_motdepasse } = request.body;

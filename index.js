@@ -12,7 +12,6 @@ app.use('/authenticate', AuthenticateRoutes)
 const accountRoutes = require('./Routes/CompteRoute');
 const profilRoutes = require('./Routes/ProfilRoute');
 const utilisateurRoutes = require('./Routes/UtilisateurRoute');
-const AuthenticateRoutes = require('./Routes/AuthenticateRoute');
 const PromotionRoutes = require('./Routes/PromotionRoute');
 const FormationRoutes = require('./Routes/FormationRoute');
 
@@ -22,6 +21,6 @@ app.use('/utilisateur', AuthenticateController.authenticateToken, utilisateurRou
 app.use('/authenticate', AuthenticateRoutes);
 app.use('/promotion', PromotionRoutes);
 app.use('/formation', FormationRoutes);
-app.use('/authenticate', AuthenticateRoutes);
+
 
 module.exports = app;

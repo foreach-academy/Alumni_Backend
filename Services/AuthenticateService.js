@@ -3,6 +3,12 @@ const jwt = require('jsonwebtoken');
 const config = require('../Config/Config.json');
 
 class AuthenticateService {
+
+    async inscription(utilisateurData){
+        const utilisateur = await Utilisateur.create(utilisateurData);
+        return this.generateToken(utilisateur);
+    }
+
     async login(ut_email, ut_motdepasse) {
         const utilisateur = await Utilisateur.findOne({ where: { ut_email } });
 
