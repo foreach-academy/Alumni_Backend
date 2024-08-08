@@ -1,12 +1,10 @@
 const nodemailer = require('nodemailer');
+const Roles = require('./constants'); // Importer l'énumération des rôles
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  tls: {
-    ciphers: 'SSLv3'
-  },
+  port: 465, // Utilisation du port 465 pour une connexion sécurisée
+  secure: true, // Utilisation de la connexion sécurisée
   auth: {
     user: 'test.foreach59@gmail.com',
     pass: 'gqan xszm akbl bwlr',
@@ -19,21 +17,21 @@ const sendDemandeInscription = async (userDetails) => {
   let textMail = `
     <p>Une nouvelle demande d'inscription a été envoyée sur le site ForEach Alumni. Voici les informations du compte :</p>
     <ul>
-      <li>Rôle demandé: ${id_role}</li>         <- /* LISTE DEROULANTE */
+      <li>Rôle demandé: ${Roles[id_role].libelle}</li> <!-- Utilisation du libellé de l'énumération -->
       <li>Nom: ${pr_nom}</li>
       <li>Prénom: ${pr_prenom}</li>
       <li>Adresse email: ${ut_email}</li>
   `;
 
-  if (id_role === 'eleve') {
+  if (id_role === Roles.Apprenant.id || id_role === Roles.AncienApprenant.id) {
     textMail += `
       <li>Formation: ${type_formation}</li>
       <li>Promotion: ${nom_promotion}</li>
     `;
-  } else if (id_role === 'entreprise') {
+  } else if (id_role === Roles.Entreprise.id) {
     textMail += `
       <li>Nom de l'entreprise: ${en_nom_contact}</li>
-      <li>Fonctions de la personne: ${en_fonction_contact}</li>
+      <li>Fonction de la personne: ${en_fonction_contact}</li>
     `;
   }
 
@@ -81,7 +79,7 @@ const sendInscriptionValide = async () => {
 const sendInscriptionRefus = async (raisonRefus) => {
   const textMail = `
     <p>Votre demande d'inscription sur le site ForEach Alumni n'a pas été acceptée pour la raison suivante :</p>
-    <p>Non autorisé </p>
+    <p>${raisonRefus}</p> <!-- Utilisation de la raison de refus -->
     <p>Vous pouvez contacter l'équipe de ForEach Academy pour en savoir plus.</p>
   `;
 
