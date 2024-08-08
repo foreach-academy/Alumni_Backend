@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
   secure: true, // Utilisation de la connexion sécurisée
   auth: {
     user: 'test.foreach59@gmail.com',
-    pass: 'ForEach59!',
+    pass: 'gqan xszm akbl bwlr',
   },
 });
 
