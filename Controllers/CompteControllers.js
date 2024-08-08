@@ -7,13 +7,14 @@ const UtilisateurService = require('../Services/UtilisateurService');
 const ProfilService = require('../Services/ProfilService');
 const ParcoursService = require('../Services/ParcoursService');
 const { sendDemandeInscription } = require('../Services/MailerService');
+const Roles = require('../Services/constants'); // Importer l'énumération des rôles
 
 class CompteController {
     async createAccountRequest(req, res) {
         const { id_role, nom, prenom, email, motdepasse, id_formation, id_promotion } = req.body;
 
         try {
-            if (id_role == 1) {
+            if (id_role === Roles.Admin.id) { // Utilisation de l'ID du rôle Admin
                 return res.status(401).json({ message: "Vous ne pouvez pas demander ce rôle" });
             }
 
@@ -27,7 +28,7 @@ class CompteController {
             const promotion = await Promotion.findByPk(id_promotion);
 
             if (!formation || !promotion) {
-                return res.status(401).json({ message: "La promotion n'existe pas !" });
+                return res.status(401).json({ message: "La formation ou la promotion n'existe pas !" });
             }
 
             const hashedPassword = await bcrypt.hash(motdepasse, 10);
@@ -77,7 +78,7 @@ class CompteController {
             }
         } catch (error) {
             console.log(error);
-            return res.status(500).json({ message: "Erreur lors de la création du compte eee" });
+            return res.status(500).json({ message: "Erreur lors de la création du compte" });
         }
     }
 }
