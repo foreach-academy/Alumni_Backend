@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const { RoleApprenant, RoleAncienApprenant, RoleEntreprise } = require('./RoleConstant');
+const RoleService = require('./RoleService');
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -13,11 +14,15 @@ const transporter = nodemailer.createTransport({
 
 const sendDemandeInscription = async (userDetails) => {
   const { id_role, pr_prenom, pr_nom, ut_email, type_formation, nom_promotion, en_nom_contact, en_fonction_contact } = userDetails;
+  
+  const userRole = await RoleService.getRoleByID(id_role);
+
+  
 
   let textMail = `
     <p>Une nouvelle demande d'inscription a été envoyée sur le site ForEach Alumni. Voici les informations du compte :</p>
     <ul>
-      <li>Rôle demandé: ${Roles[id_role].libelle}</li> <!-- Utilisation du libellé de l'énumération -->
+      <li>Rôle demandé: ${userRole.dataValues.ro_nom}</li> <!-- Utilisation du libellé de l'énumération -->
       <li>Nom: ${pr_nom}</li>
       <li>Prénom: ${pr_prenom}</li>
       <li>Adresse email: ${ut_email}</li>

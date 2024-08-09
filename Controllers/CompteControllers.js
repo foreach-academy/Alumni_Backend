@@ -35,7 +35,7 @@ class CompteController {
             const hashedPassword = await bcrypt.hash(motdepasse, 10);
             
             const t = await sequelize.transaction();
-
+            
             try {
                 const newUser = await UtilisateurService.addUtilisateur({
                     ut_email: email,
