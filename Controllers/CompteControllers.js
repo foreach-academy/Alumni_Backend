@@ -7,15 +7,15 @@ const UtilisateurService = require('../Services/UtilisateurService');
 const ProfilService = require('../Services/ProfilService');
 const ParcoursService = require('../Services/ParcoursService');
 const { sendDemandeInscription } = require('../Services/MailerService');
-const Roles = require('../Services/constants'); 
 
+const { RoleAdmin } = require('../Services/RoleConstant');
 
 class CompteController {
     async createAccountRequest(req, res) {
         const { id_role, nom, prenom, email, motdepasse, id_formation, id_promotion } = req.body;
 
         try {
-            if (id_role === Roles.Admin.id) { 
+            if (id_role === RoleAdmin.id) { 
                 return res.status(401).json({ message: "Vous ne pouvez pas demander ce rôle" });
             }
 
