@@ -7,8 +7,7 @@ const UtilisateurService = require('../Services/UtilisateurService');
 const ProfilService = require('../Services/ProfilService');
 const ParcoursService = require('../Services/ParcoursService');
 const { sendDemandeInscription } = require('../Services/MailerService');
-const Roles = require('../Services/constants'); 
-
+const Roles  = require('../Services/Constant');
 
 class CompteController {
     async createAccountRequest(req, res) {

@@ -7,6 +7,6 @@ const Roles = {
     Entreprise: { id: 5, libelle: 'Entreprise' }
   };
   
-  module.exports = Roles;
+  module.exports = {Roles};
   
   
