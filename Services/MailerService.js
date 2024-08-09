@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
 const { RoleApprenant, RoleAncienApprenant, RoleEntreprise } = require('./RoleConstant');
-const Roles = require('./constants'); // Importer l'énumération des rôles
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -25,14 +24,11 @@ const sendDemandeInscription = async (userDetails) => {
   `;
 
   if (id_role === RoleApprenant.id || id_role === RoleAncienApprenant.id) {
-  if (id_role === Roles.Apprenant.id || id_role === Roles.AncienApprenant.id) {
     textMail += `
       <li>Formation: ${type_formation}</li>
       <li>Promotion: ${nom_promotion}</li>
     `;
   } else if (id_role === RoleEntreprise.id) {
-
-  } else if (id_role === Roles.Entreprise.id) {
     textMail += `
       <li>Nom de l'entreprise: ${en_nom_contact}</li>
       <li>Fonction de la personne: ${en_fonction_contact}</li>
