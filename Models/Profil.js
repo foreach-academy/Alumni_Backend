@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../Config/Sequelize');
 const Utilisateur = require('./Utilisateur');
+const Liens = require('./Liens');
 
 class Profil extends Model {}
 
@@ -18,7 +19,27 @@ Profil.init({
         },
         allowNull: false
     },
-    id_imgprofil: {
+    id_lien: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Liens,
+            key: 'id_lien'
+        },
+        allowNull: true
+    },
+    pr_nom: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    pr_prenom: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    pr_description: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    pr_tel: {
         type: DataTypes.STRING,
         allowNull: true
     },
@@ -30,34 +51,18 @@ Profil.init({
         type: DataTypes.STRING,
         allowNull: true
     },
-    pr_tel: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    pr_description: {
-        type: DataTypes.TEXT,
-        allowNull: true
-    },
-    pr_nom: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    pr_prenom: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     recherche: {
         type: DataTypes.ENUM('stage', 'alternance', 'premier emploi', 'emploi'),
         allowNull: true
     }
 }, {
     sequelize,
-    modelName: 'profil',
+    modelName: 'Profil',
     tableName: 'profil',
-    timestamps: false,
+    timestamps: false
 });
 
-
 Profil.belongsTo(Utilisateur, { foreignKey: 'id_utilisateur' });
+Profil.belongsTo(Liens, { foreignKey: 'id_lien' });
 
 module.exports = Profil;
