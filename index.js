@@ -18,6 +18,8 @@ const utilisateurRoutes = require('./Routes/UtilisateurRoute');
 const PromotionRoutes = require('./Routes/PromotionRoute');
 const FormationRoutes = require('./Routes/FormationRoute');
 const RoleRoutes = require('./Routes/RoleRoute');
+const TypeAideRoutes = require('./Routes/TypeAideRoute');
+const TypeCompetenceRoutes = require('./Routes/TypeCompetenceRoute');
 
 
 app.use('/account', accountRoutes);
@@ -28,5 +30,8 @@ app.use('/promotion', PromotionRoutes);
 app.use('/formation', FormationRoutes);
 app.use('/role', RoleRoutes)
 app.use('/profils', profilRoute);
+app.use('/type_aide', TypeAideRoutes);
+app.use('/type_competence', TypeCompetenceRoutes);
+
 
 module.exports = app;

@@ -17,7 +17,24 @@ class UtilisateurService {
             individualHooks : true
         })
     }
+
+    async getPendingUsers() {
+        return await Utilisateur.findAll({
+            where: {
+                ut_valide: false
+            }
+        });
+    }
+    
+    async deleteUtilisateur(utilisateurID) {
+        return await Utilisateur.destroy({
+            where: {
+                id_utilisateur: utilisateurID
+            }
+        });
+    }
 }
+
     
 
 module.exports = new UtilisateurService();

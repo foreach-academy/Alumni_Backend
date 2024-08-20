@@ -49,7 +49,7 @@ class CompteController {
                     id_utilisateur: newUser.id_utilisateur,
                     pr_nom: nom,
                     pr_prenom: prenom
-                }, { transaction: t });
+                }, { transaction: t });                
 
                 await ParcoursService.addParcours({
                     id_profil: newProfile.id_profil,

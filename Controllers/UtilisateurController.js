@@ -57,6 +57,47 @@ class UtilisateurController {
             return result.status(500).json({ message: "Erreur lors de la validation de l'utilisateur/ice" });
         }
     }
+
+    async refuseUser(request, result) {
+        try {
+            const userId = request.params.id;
+            const { reason } = request.body;
+    
+            const user = await UtilisateurService.getUtilisateurByID(userId);
+    
+            if (!user) {
+                return result.status(404).json({ message: "Utilisateur/ice non trouvé·e !" });
+            }
+    
+            if (user.ut_valide) {
+                return result.status(400).json({ message: "Impossible de refuser un compte déjà validé !" });
+            }
+    
+            // Supprimer l'utilisateur ou mettre à jour son statut
+            await UtilisateurService.deleteUtilisateur(userId);
+    
+            console.log(`Utilisateur refusé: ${user.ut_email} avec la raison: ${reason}`);
+    
+            // Optionnel : Envoi d'un email à l'utilisateur
+            await sendInscriptionRefuse(user.ut_email, reason);
+    
+            return result.status(200).json({ message: "Utilisateur/ice refusé·e !" });
+        } catch (error) {
+            console.error("Erreur lors du refus de l'utilisateur :", error);
+            return result.status(500).json({ message: "Erreur lors du refus de l'utilisateur/ice" });
+        }
+    }
+    
+
+    async getPendingInscriptions(req, res) {
+        try {
+            const pendingUsers = await UtilisateurService.getPendingUsers();
+            return res.status(200).json(pendingUsers);
+        } catch (error) {
+            return res.status(500).json({ message: "Erreur lors de la récupération des inscriptions en attente." });
+        }
+    }
+    
 }
 
 module.exports = new UtilisateurController();

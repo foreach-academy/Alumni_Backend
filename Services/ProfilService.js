@@ -29,6 +29,17 @@ class ProfilService {
             throw error; 
         }
     }
+
+    async addProfil(profilData, options = {}) {
+        try {
+            // Créez le nouveau profil dans la base de données
+            const newProfil = await Profil.create(profilData, options);
+            return newProfil;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
+
 
 module.exports = new ProfilService();

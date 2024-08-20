@@ -1,5 +1,3 @@
-const ProfilService = require('../Services/ProfilService');
-
 class ProfilController {
     
     async addProfil (req, res) {
@@ -17,7 +15,7 @@ class ProfilController {
     }
 
     async getProfilById(req, res) {
-        const {id} = req.params;
+        const { id } = req.params;
         try {
             const profil = await ProfilService.getProfilById(id);
 
