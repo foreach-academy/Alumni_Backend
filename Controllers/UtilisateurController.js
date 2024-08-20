@@ -1,4 +1,5 @@
-const { sendInscriptionValide } = require('../Services/MailerService'); // Importation de la fonction
+const { sendInscriptionValide } = require('../Services/MailerService'); //
+const UtilisateurService = require('../Services/UtilisateurService'); //
 
 class UtilisateurController {
     async addUtilisateur(request, result) {
@@ -31,7 +32,9 @@ class UtilisateurController {
 
     async validateUser(request, result) {
         try {
-            const user = await UtilisateurService.getUtilisateurByID(request.params.id);
+            const userId = request.params.id;
+
+            const user = await UtilisateurService.getUtilisateurByID(userId);
 
             if (!user) {
                 return result.status(404).json({ message: "Utilisateur/ice non trouvé·e !" });
@@ -41,10 +44,11 @@ class UtilisateurController {
                 return result.status(400).json({ message: "Utilisateur/ice déjà validé·e !" });
             }
 
-            const updatedUser = await UtilisateurService.updateUtilisateur(request.params.id, {
+            const updatedUser = await UtilisateurService.updateUtilisateur(userId, {
                 ut_valide: true,
                 ut_actif: true
             });
+            console.log('Utilisateur mis à jour:', updatedUser);
 
             await sendInscriptionValide(user.ut_email);
 
