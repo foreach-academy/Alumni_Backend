@@ -30,6 +30,10 @@ class ProfilService {
         }
     }
 
+    async getAllProfil() {
+        return await Profil.findAll();
+    }
+
     async addProfil(profilData, options = {}) {
         try {
             // Créez le nouveau profil dans la base de données
