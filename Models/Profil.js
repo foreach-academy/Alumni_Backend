@@ -54,6 +54,10 @@ Profil.init({
     recherche: {
         type: DataTypes.ENUM('stage', 'alternance', 'premier emploi', 'emploi'),
         allowNull: true
+    },
+    pr_imgprofil: { 
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, {
     sequelize,
@@ -61,6 +65,7 @@ Profil.init({
     tableName: 'profil',
     timestamps: false
 });
+
 
 Profil.belongsTo(Utilisateur, { foreignKey: 'id_utilisateur' });
 Profil.belongsTo(Liens, { foreignKey: 'id_lien' });

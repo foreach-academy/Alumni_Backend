@@ -1,6 +1,9 @@
+const ProfilService = require('../Services/ProfilService');
+const path = require('path');
+
 class ProfilController {
     
-    async addProfil (req, res) {
+    async addProfil(req, res) {
         const { id_utilisateur, pr_nom, pr_prenom } = req.body;
         try {
             const newProfile = await ProfilService.addProfil({
@@ -10,6 +13,7 @@ class ProfilController {
             });
             return res.status(201).json(newProfile);
         } catch (error) {
+            console.error('Erreur lors de la création du profil:', error);
             return res.status(500).json({ message: "Erreur lors de la création du profil" });
         }
     }
@@ -25,9 +29,27 @@ class ProfilController {
 
             return res.status(200).json(profil);
         } catch (error) {
+            console.error('Erreur lors de la récupération du profil:', error);
             return res.status(500).json({ message: 'Erreur lors de la récupération du profil' });
+        }
+    }
+
+    async uploadProfileImage(req, res) {
+        try {
+            const id_profil = req.params.id;
+            const imagePath = req.file.path; // Chemin de l'image uploadée
+
+            // Mettre à jour le profil avec le chemin de l'image
+            const profil = await ProfilService.updateProfil(id_profil, { pr_imgprofil: imagePath });
+
+            return res.status(200).json({ message: 'Image de profil mise à jour', profil });
+        } catch (error) {
+            console.error('Erreur lors du téléchargement de l\'image de profil:', error);
+            return res.status(500).json({ message: 'Erreur lors du téléchargement de l\'image de profil' });
         }
     }
 }
 
 module.exports = new ProfilController();
+
+

@@ -57,14 +57,31 @@ class ProfilService {
     
     async addProfil(profilData, options = {}) {
         try {
-            // Créez le nouveau profil dans la base de données
             const newProfil = await Profil.create(profilData, options);
             return newProfil;
         } catch (error) {
             throw error;
         }
     }
+
+    async updateProfil(id, updateData) {
+        try {
+            // Trouver le profil par son ID
+            const profil = await this.getProfilById(id);
+            if (!profil) {
+                throw new Error('Profil non trouvé');
+            }
+
+            // Mettre à jour le profil avec les nouvelles données
+            Object.assign(profil, updateData);
+            await profil.save();
+
+            return profil;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
-
 module.exports = new ProfilService();
+
