@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 const ProfilService = require('../Services/ProfilService');
 const path = require('path');
-=======
-const ProfilService = require("../Services/ProfilService");
->>>>>>> d30078b (en cours)
 
 class ProfilController {
     
@@ -37,7 +33,6 @@ class ProfilController {
             return res.status(500).json({ message: 'Erreur lors de la récupération du profil' });
         }
     }
-<<<<<<< HEAD
 
     async uploadProfileImage(req, res) {
         try {
@@ -51,16 +46,6 @@ class ProfilController {
         } catch (error) {
             console.error('Erreur lors du téléchargement de l\'image de profil:', error);
             return res.status(500).json({ message: 'Erreur lors du téléchargement de l\'image de profil' });
-=======
-    
-    async getAllProfil(request, result) {
-        try {
-            const profil = await ProfilService.getAllProfil(request, result);
-            result.json(profil)
-        } catch (error) {
-            result.status(500)
-            result.json({message : "Erreur lors de la récupération des profils"})
->>>>>>> d30078b (en cours)
         }
     }
 }
