@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../Config/Sequelize');
-const Profil = require('./Profil');
 
 class Liens extends Model {}
 

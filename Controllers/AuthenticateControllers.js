@@ -11,7 +11,7 @@ class AuthenticateController {
                 return result.status(401).json({ message: "Erreur d'authentification" });
             }
 
-            const { utilisateur, token } = await AuthenticateService.login(ut_email, ut_motdepasse);
+            const { token } = await AuthenticateService.login(ut_email, ut_motdepasse);
             result.status(200).json({ message: "Connexion réussie", token });
         } catch (error) {
             result.status(401).json({ message: error.message });

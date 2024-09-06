@@ -1,9 +1,9 @@
-const { sendInscriptionValide } = require('../Services/MailerService'); //
-const UtilisateurService = require('../Services/UtilisateurService'); //
+const { sendInscriptionValide } = require('../Services/MailerService');
+const UtilisateurService = require('../Services/UtilisateurService');
 
 class UtilisateurController {
     async addUtilisateur(request, result) {
-        const { ut_email, ut_motdepasse, id_role, pr_prenom, pr_nom, type_formation, nom_promotion, en_nom_contact, en_fonction_contact } = request.body;
+        const { ut_email, ut_motdepasse, id_role } = request.body;
         try {
             const newUser = await UtilisateurService.addUtilisateur({
                 ut_email,
@@ -13,17 +13,6 @@ class UtilisateurController {
                 id_role
             });
 
-            const userDetails = {
-                id_role,
-                pr_prenom,
-                pr_nom,
-                ut_email,
-                type_formation,
-                nom_promotion,
-                en_nom_contact,
-                en_fonction_contact
-            };
-            
             return result.status(201).json(newUser);
         } catch (error) {
             return result.status(500).json({ message: "Erreur lors de la création de l'utilisateur" });
