@@ -6,7 +6,14 @@ const bcrypt = require('bcrypt');
 class Utilisateur extends Model {
 
     async validatePassword(password) {
-        return await bcrypt.compare(password, this.ut_motdepasse);
+        try {
+            const isMatch = await bcrypt.compare(password.trim(), this.ut_motdepasse.trim());
+            console.log(`is match : ${isMatch}`); // Affiche le résultat de la comparaison`
+            return isMatch;
+        } catch (error) {
+            console.error("Erreur lors de la validation du mot de passe :", error);
+            throw new Error("Erreur de validation du mot de passe");
+        }
     }
 }
 
@@ -44,14 +51,7 @@ Utilisateur.init({
     tableName: 'utilisateur',
     timestamps: false,
     hooks: {
-        beforeCreate: async (utilisateur) => {
-            utilisateur.ut_motdepasse = await bcrypt.hash(utilisateur.ut_motdepasse, 10);
-        },
-        beforeUpdate: async (utilisateur) => {
-            if (utilisateur.changed('ut_motdepasse')) {
-                utilisateur.ut_motdepasse = await bcrypt.hash(utilisateur.ut_motdepasse, 10);
-            }
-        }
+
     }
 });
 
