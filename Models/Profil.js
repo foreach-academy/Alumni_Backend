@@ -47,10 +47,6 @@ Profil.init({
         type: DataTypes.STRING,
         allowNull: true
     },
-    pr_liens: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
     recherche: {
         type: DataTypes.ENUM('stage', 'alternance', 'premier emploi', 'emploi'),
         allowNull: true

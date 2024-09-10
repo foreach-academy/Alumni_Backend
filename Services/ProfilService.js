@@ -30,7 +30,7 @@ class ProfilService {
         }
     }
 
-    async getAllProfil() {
+    async getAllProfils() {
         try {
             const profils = await Profil.findAll({
                 include: [

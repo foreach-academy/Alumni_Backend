@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../Config/Sequelize');
 
-class Liens extends Model {}
+class Lien extends Model {}
 
-Liens.init({
+Lien.init({
     id_lien: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -23,10 +23,10 @@ Liens.init({
     }
 }, {
     sequelize,
-    modelName: 'Liens',
-    tableName: 'liens',
+    modelName: 'lien',
+    tableName: 'lien',
     timestamps: false
 });
 
 
-module.exports = Liens;
+module.exports = Lien;

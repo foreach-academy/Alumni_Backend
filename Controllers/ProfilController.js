@@ -18,6 +18,16 @@ class ProfilController {
         }
     }
 
+    async getAllProfils(req, res) {
+        try {
+            const profils = await ProfilService.getAllProfils();
+            return res.status(201).json(profils);
+        } catch (error) {
+            console.error('Erreur de récupération des profils:', error);
+            return res.status(500).json({ message: "Erreur de récupération des profils" });
+        }
+    }
+
     async getProfilById(req, res) {
         const { id } = req.params;
         try {
