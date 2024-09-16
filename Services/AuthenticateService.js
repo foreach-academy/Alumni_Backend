@@ -14,8 +14,7 @@ class AuthenticateService {
             throw new Error("Le compte doit être validé par un administrateur");
         }
 
-        const token = this.generateToken(utilisateur);
-        return { utilisateur, token };
+        return utilisateur;
     }
 
     generateToken(utilisateur) {
