@@ -10,12 +10,11 @@ class AuthenticateController {
             if (!ut_email || !ut_motdepasse) {
                 return result.status(401).json({ message: "Erreur d'authentification" });
             }
-
-            const { token } = await AuthenticateService.login(ut_email, ut_motdepasse);
-            result.status(200).json({ message: "Connexion réussie", token });
+            const utilisateur = await AuthenticateService.login(ut_email, ut_motdepasse);
+            result.json({token : AuthenticateService.generateToken(utilisateur)})
         } catch (error) {
-            result.status(401).json({ message: error.message });
-        }
+            console.error("Erreur lors de la connexion :", error.message);
+            result.status(500).json({ message: error.message });        }
     }
 
     authenticateToken(req, res, next) {
