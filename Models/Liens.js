@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../Config/Sequelize');
 
-class Lien extends Model {}
+class liens extends Model {}
 
-Lien.init({
+liens.init({
     id_lien: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,13 +20,17 @@ Lien.init({
     li_perso: {
         type: DataTypes.STRING,
         allowNull: true
-    }
+    },
+    id_profil: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
 }, {
     sequelize,
-    modelName: 'lien',
-    tableName: 'lien',
+    modelName: 'liens',
+    tableName: 'liens',
     timestamps: false
 });
 
 
-module.exports = Lien;
+module.exports = liens;

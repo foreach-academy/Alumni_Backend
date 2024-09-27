@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../Config/Sequelize');
 const Utilisateur = require('./Utilisateur');
-const Liens = require('./Liens');
+const liens = require('./Liens');
 
 class Profil extends Model {}
 
@@ -22,7 +22,7 @@ Profil.init({
     id_lien: {
         type: DataTypes.INTEGER,
         references: {
-            model: Liens,
+            model: liens,
             key: 'id_lien'
         },
         allowNull: true
@@ -64,6 +64,6 @@ Profil.init({
 
 
 Profil.belongsTo(Utilisateur, { foreignKey: 'id_utilisateur' });
-Profil.belongsTo(Liens, { foreignKey: 'id_lien' });
+Profil.belongsTo(liens, { foreignKey: 'id_lien' });
 
 module.exports = Profil;
