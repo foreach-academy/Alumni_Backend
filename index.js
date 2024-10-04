@@ -23,6 +23,7 @@ const TypeAideRoutes = require('./Routes/TypeAideRoute');
 const TypeCompetenceRoutes = require('./Routes/TypeCompetenceRoute');
 const uploadRoutes = require('./Routes/uploadRoutes');
 const liensRoutes = require('./Routes/LiensRoutes');
+const ProfilAideRoutes = require('./Routes/ProfilAideRoutes');
 
 
 app.use('/account', accountRoutes);
@@ -38,6 +39,7 @@ app.use('/type_competence', TypeCompetenceRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use('/api', uploadRoutes);
 app.use('/', liensRoutes);
+app.use('/', ProfilAideRoutes);
 
 
 module.exports = app;
