@@ -54,12 +54,9 @@ Utilisateur.init({
     }
 }, {
     sequelize,
-    modelName: 'utilisateur',
+    modelName: 'Utilisateur',
     tableName: 'utilisateur',
-    timestamps: false,
-    hooks: {
-
-    }
+    timestamps: false
 });
 
 module.exports = Utilisateur;
