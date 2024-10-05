@@ -19,15 +19,10 @@ class ProfilAideService {
         });
     }
 
-    // Mettre à jour une association Profil-Aide par son ID
-    async updateProfilAide(id_profil_aide) {
-        const profilAide = await ProfilAide.findByPk(id_profil_aide);
-        if (profilAide) {
-            return await profilAide.update({
-                id_typeaide: id_typeaide
-            });
-        }
-        throw new Error('Association Profil-Aide non trouvée');
+    async updateProfilAide(id_profil_aide, updateData) {
+        return await ProfilAide.update(updateData, {
+            where: { id_profil_aide: id_profil_aide }
+        });
     }
 
     // Supprimer une association Profil-Aide par son ID

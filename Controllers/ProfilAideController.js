@@ -40,15 +40,26 @@ class ProfilAideController {
     // Mettre à jour une association Profil-Aide
     async updateProfilAide(req, res) {
         try {
-            const { id_profil_aide } = req.params;
-            const updatedProfilAide = await ProfilAideService.updateProfilAide(id_profil_aide, req.body);
+            const { id_profil_aide } = req.params; // Récupère l'ID du paramètre d'URL
+            const { id_typeaide } = req.body; // Récupère le champ à mettre à jour depuis le corps de la requête
+    
+            const profilAide = await ProfilAideService.findOne({
+                where: { id_profil_aide: id_profil_aide }
+            });
+    
+            if (!profilAide) {
+                return res.status(404).json({ message: 'Profil aide non trouvé' });
+            }
+    
+            const updatedProfilAide = await ProfilAideService.updateProfilAide(id_profil_aide, { id_typeaide });
+    
             res.status(200).json(updatedProfilAide);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
+    
 
-    // Supprimer une association Profil-Aide
     async deleteProfilAide(req, res) {
         try {
             const { id_profil_aide } = req.params;
