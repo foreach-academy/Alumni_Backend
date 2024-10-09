@@ -21,7 +21,9 @@ class ProfilController {
     async getAllProfils(req, res) {
         try {
             const profils = await ProfilService.getAllProfils();
-            return res.status(201).json(profils);
+            
+            return res.status(200).json(profils);
+            // return res.status(201).json(profils);
         } catch (error) {
             console.error('Erreur de récupération des profils:', error);
             return res.status(500).json({ message: "Erreur de récupération des profils" });
@@ -58,8 +60,30 @@ class ProfilController {
             return res.status(500).json({ message: 'Erreur lors du téléchargement de l\'image de profil' });
         }
     }
+
+    async updateProfil(req, res) {
+        const { id } = req.params; // Récupérer l'ID du profil depuis les paramètres de la route
+        console.log("Requête pour mise à jour du profil reçue", req.params.id);  
+        
+        const updateData = req.body; // Les nouvelles données envoyées dans la requête
+        // console.log(req.body)
+
+        try {
+            // Appel du service pour mettre à jour le profil
+            const updatedProfil = await ProfilService.updateProfil(id, updateData);
+
+            // Si le profil n'est pas trouvé
+            if (!updatedProfil) {
+                return res.status(404).json({ message: 'Profil non trouvé' });
+            }
+
+            // Réponse avec les informations mises à jour
+            return res.status(200).json({ message: 'Profil mis à jour avec succès', profil: updatedProfil });
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour du profil:', error);
+            return res.status(500).json({ message: 'Erreur lors de la mise à jour du profil' });
+        }
+    }
 }
 
 module.exports = new ProfilController();
-
-

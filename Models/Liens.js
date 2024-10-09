@@ -20,7 +20,11 @@ Liens.init({
     li_perso: {
         type: DataTypes.STRING,
         allowNull: true
-    }
+    },
+    id_profil: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
 }, {
     sequelize,
     modelName: 'Liens',

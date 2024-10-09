@@ -1,6 +1,6 @@
 const Profil = require('../Models/Profil');
 const Utilisateur = require('../Models/Utilisateur');
-const Liens = require('../Models/Liens');
+const liens = require('../Models/Liens');
 const Competence = require('../Models/Competence');
 
 class ProfilService {
@@ -14,7 +14,7 @@ class ProfilService {
                         attributes: ['ut_email', 'id_role']
                     },
                     {
-                        model: Liens,
+                        model: liens,
                         attributes: ['li_linkedin', 'li_github', 'li_perso']
                     },
                     {
@@ -39,7 +39,7 @@ class ProfilService {
                         attributes: ['ut_email', 'id_role']
                     },
                     {
-                        model: Liens,
+                        model: liens,
                         attributes: ['li_linkedin', 'li_github', 'li_perso']
                     },
                     {
@@ -48,6 +48,7 @@ class ProfilService {
                         through: { attributes: [] }
                     }
                 ]
+                               
             });
             return profils;
         } catch (error) {
@@ -66,21 +67,20 @@ class ProfilService {
 
     async updateProfil(id, updateData) {
         try {
-            // Trouver le profil par son ID
-            const profil = await this.getProfilById(id);
+            const profil = await Profil.findByPk(id);
             if (!profil) {
                 throw new Error('Profil non trouvé');
             }
-
-            // Mettre à jour le profil avec les nouvelles données
-            Object.assign(profil, updateData);
-            await profil.save();
-
+    
+            await profil.update(updateData);
+    
             return profil;
         } catch (error) {
-            throw error;
+            console.error('Erreur lors de la mise à jour du profil:', error);
+            throw error; 
         }
     }
+
 }
 
 module.exports = new ProfilService();

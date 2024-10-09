@@ -81,7 +81,44 @@ class UtilisateurController {
             return res.status(500).json({ message: "Erreur lors de la récupération des inscriptions en attente." });
         }
     }
-    
+   
+    async getUtilisateurByID(req, res) {
+        try {
+            const utilisateur = await UtilisateurService.getUtilisateurByID(req.params.id);
+            if (!utilisateur) {
+                return res.status(404).json({ message: "Utilisateur non trouvé" });
+            }
+            return res.status(200).json(utilisateur);
+        } catch (error) {
+            return res.status(500).json({ message: "Erreur lors de la récupération de l'utilisateur" });
+        }
+    }
+
+    async getAllUtilisateur(req, res) {
+        try {
+            const utilisateurs = await UtilisateurService.getAllUtilisateur();
+            return res.status(200).json(utilisateurs);
+        } catch (error) {
+            return res.status(500).json({ message: "Erreur lors de la récupération des utilisateurs" });
+        }
+    }
+
+    async getProfilByUtilisateur(request, result) {
+        const utilisateurID = request.params.id; // Récupérer l'ID de l'utilisateur à partir des paramètres de la requête
+        
+        try {
+            // Appel du service pour obtenir l'utilisateur avec le profil associé
+            const utilisateur = await UtilisateurService.getProfilByUtilisateurId(utilisateurID);
+            if (!utilisateur || !utilisateur.profil) {
+                return result.status(404).json({ message: "Utilisateur ou profil non trouvé" });
+            }
+            
+            // Renvoie l'ID du profil
+            return result.status(200).json({ id_profil: utilisateur.profil });
+        } catch (error) {
+            return result.status(500).json({ message: "Erreur lors de la récupération du profil de l'utilisateur" });
+        }
+    }
 }
 
 module.exports = new UtilisateurController();

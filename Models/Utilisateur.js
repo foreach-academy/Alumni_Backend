@@ -44,6 +44,13 @@ Utilisateur.init({
     id_role: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    id_profil: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'profil', 
+            key: 'id_profil'
+        }
     }
 }, {
     sequelize,
