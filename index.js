@@ -25,6 +25,7 @@ const uploadRoutes = require('./Routes/uploadRoutes');
 const liensRoutes = require('./Routes/LiensRoutes');
 const ProfilAideRoutes = require('./Routes/ProfilAideRoutes');
 const ProfilCompetenceRoutes = require('./Routes/ProfilCompetenceRoutes');
+const CompetenceRoutes = require('./Routes/CompetenceRoutes');
 
 
 app.use('/account', accountRoutes);
@@ -41,7 +42,8 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api', uploadRoutes);
 app.use('/', liensRoutes);
 app.use('/', ProfilAideRoutes);
-app.use('/', ProfilCompetenceRoutes);
+app.use('/profil_competence', ProfilCompetenceRoutes);
+app.use('/competence', CompetenceRoutes);
 
 
 module.exports = app;

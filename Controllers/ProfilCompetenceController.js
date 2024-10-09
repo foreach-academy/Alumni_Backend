@@ -1,48 +1,50 @@
-const  ProfilCompetenceService = require('../Services/ProfilCompetenceService.js');
+const  ProfilCompetenceService = require('../Services/ProfilCompetenceService');
 
 class ProfilCompetenceController {
 
     // Récupérer toutes les compétences
-    async getAllCompetences(req, res) {
+    async getAllProfilCompetences(req, res) {
         try {
-            const competences = await ProfilCompetenceService.getAllCompetence();
-            res.status(200).json(competences);
+            const ProfilCompetences = await ProfilCompetenceService.getAllProfilCompetence();
+            res.status(200).json(ProfilCompetences);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
 
     // Récupérer une compétence spécifique par l'ID du profil
-    async getCompetenceById(req, res) {
+    async getProfilCompetenceById(req, res) {
         try {
             const { id_profil } = req.params;
-            const competence = await ProfilCompetenceService.getCompetenceById(id_profil);
-            if (!competence) {
+            const ProfilCompetences = await ProfilCompetenceService.getProfilCompetenceById(id_profil);
+            if (!ProfilCompetences) {
                 return res.status(404).json({ message: 'Compétence non trouvée' });
             }
-            res.status(200).json(competence);
+            res.status(200).json(ProfilCompetences);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
 
     // Ajouter une nouvelle compétence à un profil
-    async addCompetence(req, res) {
+    async addProfilCompetence(req, res) {
         try {
             const { id_profil, id_competence } = req.body;
-            const newCompetence = await ProfilCompetenceService.addCompetence(id_profil, id_competence);
-            res.status(201).json(newCompetence);
+            console.log("Data received - id_profil:", id_profil, "id_competence:", id_competence);
+            const newProfilCompetence = await ProfilCompetenceService.addProfilCompetence(id_profil, id_competence);
+            res.status(201).json(newProfilCompetence);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
+    
 
     // Mettre à jour une compétence pour un profil
-    async updateCompetence(req, res) {
+    async updateProfilCompetence(req, res) {
         try {
             const { id_competence } = req.params;
             const updateData = req.body;
-            const updatedCompetence = await ProfilCompetenceService.updateCompetence(id_competence, updateData);
+            const updatedCompetence = await ProfilCompetenceService.updateProfilCompetence(id_competence, updateData);
             if (updatedCompetence[0] === 0) { // Aucun enregistrement mis à jour
                 return res.status(404).json({ message: 'Compétence non trouvée ou non mise à jour' });
             }
@@ -53,10 +55,10 @@ class ProfilCompetenceController {
     }
 
     // Supprimer une compétence par son ID
-    async deleteCompetence(req, res) {
+    async deleteProfilCompetence(req, res) {
         try {
             const { id_competence } = req.params;
-            const deleted = await ProfilCompetenceService.deleteProfilAide(id_competence);
+            const deleted = await ProfilCompetenceService.deleteProfilCompetence(id_competence);
             if (deleted) {
                 res.status(200).json({ message: 'Compétence supprimée avec succès' });
             } else {
@@ -68,11 +70,11 @@ class ProfilCompetenceController {
     }
 
     // Récupérer les compétences d'un profil spécifique
-    async getProfilAideByProfilId(req, res) {
+    async getProfilCompetenceByProfilId(req, res) {
         try {
             const { id_profil } = req.params;
-            const profilAides = await ProfilCompetenceService.getProfilAideByProfilId(id_profil);
-            res.status(200).json(profilAides);
+            const profilCompetences = await ProfilCompetenceService.getProfilCompetenceByProfilId(id_profil);
+            res.status(200).json(profilCompetences);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

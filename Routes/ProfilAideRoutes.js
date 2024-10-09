@@ -8,7 +8,7 @@ router.get('/profil_aide/:id_profil_aide', ProfilAideController.getProfilAideByI
 
 router.post('/', ProfilAideController.addProfilAide);
 
-router.put('/profil_aide/:id_profil_aide', ProfilAideController.updateProfilAide);
+router.patch('/profil_aide/:id_profil_aide', ProfilAideController.updateProfilAide);
 
 router.delete('/profil_aide/:id_profil_aide', ProfilAideController.deleteProfilAide);
 

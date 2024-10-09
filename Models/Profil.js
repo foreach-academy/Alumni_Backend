@@ -31,7 +31,7 @@ Profil.init({
     id_lien: {
         type: DataTypes.INTEGER,
         references: {
-            model: liens,
+            model: Liens,
             key: 'id_lien'
         },
         allowNull: true
