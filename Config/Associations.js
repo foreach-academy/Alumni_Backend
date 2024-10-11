@@ -21,9 +21,11 @@ Liens.hasOne(Profil, { foreignKey: 'id_lien' });
 Profil.belongsToMany(Competence, { through: 'Profil_Competence', foreignKey: 'id_profil' });
 Competence.belongsToMany(Profil, { through: 'Profil_Competence', foreignKey: 'id_competence' });
 
-// Association many-to-many entre Profil et TypeAide via ProfilAide
+// Association many-to-many entre Profil et TypeAide
 Profil.belongsToMany(TypeAide, { through: ProfilAide, foreignKey: 'id_profil' });
 TypeAide.belongsToMany(Profil, { through: ProfilAide, foreignKey: 'id_typeaide' });
+
+
 
 module.exports = {
     Utilisateur,

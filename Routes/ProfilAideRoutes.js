@@ -12,7 +12,7 @@ router.patch('/profil_aide/:id_profil_aide', ProfilAideController.updateProfilAi
 
 router.delete('/profil_aide/:id_profil_aide', ProfilAideController.deleteProfilAide);
 
-router.get('/profils/:id_profil/profil_aide', ProfilAideController.getProfilAideByProfilId);
+router.get('/profil/:id_profil/profil_aide', ProfilAideController.getProfilAideByProfilId);
 
 
 module.exports = router;

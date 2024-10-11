@@ -43,8 +43,13 @@ Parcours.init({
     timestamps: false,
 });
 
-Parcours.belongsTo(Profil, { foreignKey: 'id_profil' });
-Parcours.belongsTo(Formation, { foreignKey: 'id_formation' });
-Parcours.belongsTo(Promotion, { foreignKey: 'id_promotion' });
+Parcours.belongsTo(Profil, { foreignKey: 'id_profil' }); 
+Profil.hasMany(Parcours, { foreignKey: 'id_profil' }); 
+
+Parcours.belongsTo(Formation, { foreignKey: 'id_formation' }); 
+Formation.hasMany(Parcours, { foreignKey: 'id_formation' });
+
+Parcours.belongsTo(Promotion, { foreignKey: 'id_promotion' }); 
+Promotion.hasMany(Parcours, { foreignKey: 'id_promotion' });
 
 module.exports = Parcours;

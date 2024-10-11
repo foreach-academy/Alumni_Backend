@@ -5,4 +5,6 @@ const router = express.Router();
 router.get("/", (req,res) => FormationController.getAllFormation(req,res));
 router.get("/:id" , (request, result)  =>   FormationController.getFormationByID(request, result));
 
+router.post("/", (req, res) => FormationController.addOrUpdateFormation(req, res));  // Ajout ou mise à jour
+
 module.exports = router;

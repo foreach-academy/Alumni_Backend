@@ -42,30 +42,39 @@ class ProfilCompetenceController {
     // Mettre à jour une compétence pour un profil
     async updateProfilCompetence(req, res) {
         try {
-            const { id_competence } = req.params;
+            const { id_profil_competence } = req.params;
             const updateData = req.body;
-            const updatedCompetence = await ProfilCompetenceService.updateProfilCompetence(id_competence, updateData);
+    
+            // Vérification si updateData contient des données
+            if (Object.keys(updateData).length === 0) {
+                return res.status(400).json({ message: 'Aucune donnée à mettre à jour' });
+            }
+    
+            const updatedCompetence = await ProfilCompetenceService.updateProfilCompetence(id_profil_competence, updateData);
+            
             if (updatedCompetence[0] === 0) { // Aucun enregistrement mis à jour
                 return res.status(404).json({ message: 'Compétence non trouvée ou non mise à jour' });
             }
+            
             res.status(200).json({ message: 'Compétence mise à jour avec succès' });
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            // res.status(500).json({ message: error.message });
         }
     }
+    
 
-    // Supprimer une compétence par son ID
+    // Supprimer un profil compétence par son ID
     async deleteProfilCompetence(req, res) {
         try {
-            const { id_competence } = req.params;
-            const deleted = await ProfilCompetenceService.deleteProfilCompetence(id_competence);
-            if (deleted) {
-                res.status(200).json({ message: 'Compétence supprimée avec succès' });
+            const { id_profil, id_profil_competence } = req.params; // Récupération des deux paramètres
+            const profilCompetences = await ProfilCompetenceService.deleteProfilCompetence(id_profil, id_profil_competence); // Passer les deux paramètres au service
+            if (profilCompetences) {
+                res.status(200).json({ message: 'Profil compétence supprimée avec succès' });
             } else {
-                res.status(404).json({ message: 'Compétence non trouvée' });
+                res.status(404).json({ message: 'Aucune compétence trouvée pour ce profil' });
             }
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            // res.status(500).json({ message: error.message });
         }
     }
 
@@ -79,6 +88,7 @@ class ProfilCompetenceController {
             res.status(500).json({ message: error.message });
         }
     }
+
 }
 
 module.exports = new ProfilCompetenceController();

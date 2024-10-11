@@ -1,4 +1,5 @@
 const ProfilAide = require('../Models/ProfilAide');
+const TypeAide = require('../Models/TypeAide');
 
 class ProfilAideService {
     // Récupérer toutes les associations Profil-Aide
@@ -37,9 +38,10 @@ class ProfilAideService {
     // Récupérer une association Profil-Aide par ID de profil
     async getProfilAideByProfilId(id_profil) {
         return await ProfilAide.findAll({
-            where: { id_profil: id_profil }
+            where: { id_profil: id_profil },
+            include: [{ model: TypeAide }]
         });
-}
+    }
 
 }
 

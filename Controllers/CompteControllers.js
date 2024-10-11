@@ -48,7 +48,8 @@ class CompteController {
                 const newProfile = await ProfilService.addProfil({
                     id_utilisateur: newUser.id_utilisateur,
                     pr_nom: nom,
-                    pr_prenom: prenom
+                    pr_prenom: prenom,
+                    id_role : 2
                 }, { transaction: t });                
 
                 await ParcoursService.addParcours({
