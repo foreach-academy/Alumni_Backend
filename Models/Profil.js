@@ -63,6 +63,10 @@ Profil.init({
     pr_imgprofil: { 
         type: DataTypes.STRING,
         allowNull: true
+    },
+    fun_fact: { 
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, {
     sequelize,

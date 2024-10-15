@@ -42,10 +42,10 @@ class UtilisateurService {
             throw error;
         }
     }
-    async updateUtilisateur(utilisateurID, utilisateur) {
-        return await Utilisateur.update(utilisateur, {
+    async updateUtilisateur(utilisateurId, utilisateurData) {
+        return await Utilisateur.update(utilisateurData, {
             where : {
-                id_utilisateur : utilisateurID
+                id_utilisateur : utilisateurId
             },
             individualHooks : true
         })
@@ -65,6 +65,12 @@ class UtilisateurService {
                 id_utilisateur: utilisateurID
             }
         });
+    }
+
+    async getUtilisateurByProfilId(id_profil) {
+        return await Utilisateur.findOne({ 
+            where: { id_profil: id_profil }
+         });
     }
 }
 

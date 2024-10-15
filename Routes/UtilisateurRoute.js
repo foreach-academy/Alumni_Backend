@@ -16,4 +16,8 @@ router.get('/', (req, res) => UtilisateurController.getAllUtilisateur(req, res))
 
 router.get('/:id/profil', (req, res) => UtilisateurController.getProfilByUtilisateur(req, res));
 
+router.get('/profil/:id_profil', UtilisateurController.getUtilisateurByProfilId);
+
+router.patch('/:id', UtilisateurController.updateUtilisateur);
+
 module.exports = router;

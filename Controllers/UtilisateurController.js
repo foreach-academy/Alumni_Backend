@@ -119,6 +119,41 @@ class UtilisateurController {
             return result.status(500).json({ message: "Erreur lors de la récupération du profil de l'utilisateur" });
         }
     }
+
+    async getUtilisateurByProfilId(req, res) {
+        try {
+            const { id_profil } = req.params;
+            const utilisateur = await UtilisateurService.getUtilisateurByProfilId(id_profil);
+            if (utilisateur) {
+                res.status(200).json(utilisateur);
+            } else {
+                res.status(404).json({ message: 'Aucun utilisateur trouvé pour ce profil' });
+            }
+        } catch (error) {
+            res.status(500).json({ message: 'Erreur lors de la récupération des infos utilisateur', error });
+        }
+    };
+    
+    async updateUtilisateur(req, res) {
+        const utilisateurID = req.params.id; // On récupère l'ID de l'utilisateur depuis les paramètres de la requête
+        const utilisateurData = req.body; // On récupère les données de l'utilisateur depuis le corps de la requête
+    
+        try {
+        // Appel au service pour mettre à jour l'utilisateur
+        const updatedUtilisateur = await UtilisateurService.updateUtilisateur(utilisateurID, utilisateurData);
+    
+        // Vérifie si l'utilisateur a bien été mis à jour
+        if (updatedUtilisateur[0] === 1) {
+            return res.status(200).json({ message: "Utilisateur mis à jour avec succès" });
+        } else {
+            return res.status(404).json({ message: "Utilisateur non trouvé ou aucune modification détectée" });
+        }
+        } catch (error) {
+        console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+        return res.status(500).json({ message: "Erreur serveur lors de la mise à jour de l'utilisateur" });
+        }
+    }
+
 }
 
 module.exports = new UtilisateurController();
